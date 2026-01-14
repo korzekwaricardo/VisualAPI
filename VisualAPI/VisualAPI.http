@@ -1,0 +1,6 @@
+@VisualAPI_HostAddress = http://localhost:5291
+
+GET {{VisualAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
