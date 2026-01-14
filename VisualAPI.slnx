@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="VisualAPI/VisualAPI.csproj" />
+  <Project Path="VisualSoftware.Desafio.Application/VisualSoftware.Desafio.Application.csproj" Id="115a6627-cddc-47a7-839a-7cedd8e19efd" />
+  <Project Path="VisualSoftware.Desafio.Domain/VisualSoftware.Desafio.Domain.csproj" Id="412f3e2e-fca3-4cef-a997-2fcc66c2c260" />
+  <Project Path="VisualSoftware.Desafio.Infrastructure/VisualSoftware.Desafio.Infrastructure.csproj" Id="30cdafde-6905-49ae-bdbf-0b5edf678686" />
 </Solution>
