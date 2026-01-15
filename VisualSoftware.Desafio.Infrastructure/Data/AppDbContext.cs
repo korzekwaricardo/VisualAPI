@@ -12,13 +12,13 @@ namespace VisualSoftware.Desafio.Infrastructure.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; } // Para Auth JWT
+        public DbSet<Product> Product { get; set; }
+        public DbSet<User> User { get; set; } // Para Auth JWT
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Produto>().Property(p => p.Nome).IsRequired().HasMaxLength(100);
+            modelBuilder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(100);
         }
     }
 

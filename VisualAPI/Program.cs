@@ -7,11 +7,12 @@ using VisualSoftware.Desafio.Application.Interfaces;
 using VisualSoftware.Desafio.Application.Services;
 using VisualSoftware.Desafio.Domain.Interfaces;
 using VisualSoftware.Desafio.Infrastructure.Data;
+using VisualSoftware.Desafio.Infrastructure.Persistence;
 using VisualSoftware.Desafio.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<VisualSoftware.Desafio.Infrastructure.Data.AppDbContext>(options => options.UseNpgsql(connectionString));
 // Add services to the container.
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>)); // Genérico
@@ -45,7 +46,7 @@ builder.Services.AddSwaggerGen(c =>
             {
                 Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
             },
-            new string {}
+            new string[] { }
         }
     });
 });
@@ -73,7 +74,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var db = scope.ServiceProvider.GetRequiredService<VisualSoftware.Desafio.Infrastructure.Data.AppDbContext>();
     db.Database.Migrate();
 }
 

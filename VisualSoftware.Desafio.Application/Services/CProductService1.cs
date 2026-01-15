@@ -8,13 +8,13 @@ using VisualSoftware.Desafio.Application.DTOs;
 using VisualSoftware.Desafio.Domain.Entities;
 using VisualSoftware.Desafio.Domain.Interfaces;
 
-namespace VisualSoftware.Desafio.Application.Interfaces
+namespace VisualSoftware.Desafio.Application.Services
 {
     public class ProductService
     {
-        private readonly IRepository<Produto> _repository;
+        private readonly IRepository<Product> _repository;
 
-        public ProductService(IRepository<Produto> repository)
+        public ProductService(IRepository<Product> repository)
         {
             _repository = repository;
         }
@@ -22,27 +22,21 @@ namespace VisualSoftware.Desafio.Application.Interfaces
         public async Task<IEnumerable<ProductDto>> GetAllAsync()
         {
             var products = await _repository.GetAllAsync();
-            // Mapeamento manual (Em projetos reais usamos AutoMapper ou Mapster)
             return products.Select(p => new ProductDto(p.Id, p.Name, p.Price, p.StockQuantity));
         }
 
         public async Task<ProductDto> CreateAsync(CreateProductDto dto, string tenantId)
         {
-            var product = new Produto
-            {
-                Name = dto.Name,
-                Description = dto.Description,
-                Price = dto.Price,
-                StockQuantity = dto.StockQuantity,
-                TenantId = tenantId // Importante: Setamos o Tenant aqui!
-            };
+            // Aqui usamos o construtor da entidade que valida as regras (preço negativo, etc)
+            var product = new Product(dto.Name, dto.Description, dto.Price, dto.StockQuantity, tenantId);
 
             await _repository.AddAsync(product);
+
             return new ProductDto(product.Id, product.Name, product.Price, product.StockQuantity);
         }
 
-        // Método PATCH (Atualização Parcial)
-        public async Task UpdatePartialAsync(int id, JsonPatchDocument<Produto> patchDoc)
+        // Método PATCH usando GUID
+        public async Task UpdatePartialAsync(Guid id, JsonPatchDocument<Product> patchDoc)
         {
             var product = await _repository.GetByIdAsync(id);
             if (product == null) throw new KeyNotFoundException("Produto não encontrado");

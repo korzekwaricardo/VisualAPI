@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,7 +19,7 @@ namespace VisualSoftware.Desafio.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task<T?> GetByIdAsync(int id) => await _context.Set<T>().FindAsync(id);
+        public async Task<T?> GetByIdAsync(Guid id) => await _context.Set<T>().FindAsync(id);
 
         public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
@@ -41,6 +42,31 @@ namespace VisualSoftware.Desafio.Infrastructure.Persistence
         {
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
+        }
+
+        Task<T?> IRepository<T>.GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<T>> IRepository<T>.GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<T>.AddAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<T>.UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<T>.DeleteAsync(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

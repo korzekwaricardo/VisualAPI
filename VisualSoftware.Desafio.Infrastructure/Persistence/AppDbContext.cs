@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VisualSoftware.Desafio.Domain.Entities;
+using VisualSoftware.Desafio.Domain.Interfaces;
 
 namespace VisualSoftware.Desafio.Infrastructure.Persistence
 {

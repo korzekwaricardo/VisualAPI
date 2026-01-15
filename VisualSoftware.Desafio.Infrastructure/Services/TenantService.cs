@@ -19,13 +19,18 @@ namespace VisualSoftware.Desafio.Infrastructure.Services
 
         public string GetTenantId()
         {
+            return GetTenantId(_httpContextAccessor);
+        }
+
+        public string GetTenantId(IHttpContextAccessor _httpContextAccessor)
+        {
             // Tenta pegar do Token JWT (Claim)
             var tenantId = _httpContextAccessor.HttpContext?.User?.FindFirst("tenant_id")?.Value;
 
             // Se não estiver logado, tenta pegar do Header (útil para o momento do Login)
             if (string.IsNullOrEmpty(tenantId))
             {
-                tenantId = _httpContextAccessor.HttpContext?.Request.Headers.FirstOrDefault();
+                tenantId = _httpContextAccessor.HttpContext?.Request.Headers.FirstOrDefault().Value;
             }
 
             return tenantId ?? string.Empty;

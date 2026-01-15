@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotSwashbuckle.AspNetCore" Version="3.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.12">
@@ -14,11 +15,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.ApiTesting.Xunit" Version="10.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\VisualSoftware.Desafio.Application\VisualSoftware.Desafio.Application.csproj" />
     <ProjectReference Include="..\VisualSoftware.Desafio.Infrastructure\VisualSoftware.Desafio.Infrastructure.csproj" />
+    <ProjectReference Include="..\VisualSoftware.Desafio.Domain\VisualSoftware.Desafio.Domain.csproj" />
   </ItemGroup>
 
 </Project>

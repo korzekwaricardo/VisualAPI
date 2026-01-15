@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using VisualSoftware.Desafio.Application.DTOs;
 using VisualSoftware.Desafio.Application.Interfaces;
 using VisualSoftware.Desafio.Domain.Entities;
+using VisualSoftware.Desafio.Application.Services;
 
 namespace VisualAPI.Controllers
 {
@@ -13,9 +14,9 @@ namespace VisualAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly ProductService _service;
-        private readonly Domain.Interfaces.ITenantService _tenantService;
+        private readonly VisualSoftware.Desafio.Domain.Interfaces.ITenantService _tenantService;
 
-        public ProductsController(ProductService service, Domain.Interfaces.ITenantService tenantService)
+        public ProductsController(ProductService service, VisualSoftware.Desafio.Domain.Interfaces.ITenantService tenantService)
         {
             _service = service;
             _tenantService = tenantService;
@@ -38,7 +39,7 @@ namespace VisualAPI.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, JsonPatchDocument<Product> patchDoc)
+        public async Task<IActionResult> Patch(Guid id, JsonPatchDocument<Product> patchDoc)
         {
             if (patchDoc == null) return BadRequest();
 

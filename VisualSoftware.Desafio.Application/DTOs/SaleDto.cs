@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace VisualSoftware.Desafio.Application.DTOs
 {
-    public record CreateSaleItemDto(int ProductId, int Quantity);
-    public record CreateSaleDto(int CustomerId, List<CreateSaleItemDto> Items);
+    public record CreateSaleItemDto(Guid ProductId, int Quantity);
+    public record CreateSaleDto(Guid CustomerId, List<CreateSaleItemDto> Items);
 }
