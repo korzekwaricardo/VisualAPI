@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace VisualSoftware.Desafio.Application.DTOs
 {
-    internal class ProdutoDto
-    {
-    }
+    public record RegisterUserDto(
+    string Username,
+    string Email,
+    string Password,
+    string Role
+);
 }
